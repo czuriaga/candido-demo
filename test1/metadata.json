@@ -5,14 +5,14 @@
     "source_code": "script.whizzml",
     "inputs": [
         {
-            "name": "a-dataset",
+            "name": "input-dataset-id",
             "type": "dataset-id",
             "description": "Dataset that will be filtered"
         }
     ],
     "outputs": [
         {
-            "name": "my-dataset",
+            "name": "output-dataset-id",
             "type": "dataset-id",
             "description": "New dataset without non-preferred fields."
         }
