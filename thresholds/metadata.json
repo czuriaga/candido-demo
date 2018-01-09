@@ -1,5 +1,5 @@
 {
-  "name": "Generate Threshold Matrix.",
+  "name": "Generate Threshold Matrix",
   "description": "The script receives 4 arguments:\n\n- **evaluation**: User evaluation to inspect\n\n- **class-name**: Name of the positive class, or the class to inspect\n\n- **cost-FP**: False positive cost\n\n- **cost-FN**: False negative cost\n\n- **dataset-name**: Name of the resources (Source inline and Dataset)\n\nAnd returns as output a dataset-id which header is: _\"Threshold,TP,FP,TN,FN,Total\\_Cost\"_",
   "tags": [
     "Evaluation",
