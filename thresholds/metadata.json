@@ -1,0 +1,52 @@
+{
+  "name": "Generate Threshold Matrix.",
+  "description": "The script receives 4 arguments:\n\n- **evaluation**: User evaluation to inspect\n\n- **class-name**: Name of the positive class, or the class to inspect\n\n- **cost-FP**: False positive cost\n\n- **cost-FN**: False negative cost\n\n- **dataset-name**: Name of the resources (Source inline and Dataset)\n\nAnd returns as output a dataset-id which header is: _\"Threshold,TP,FP,TN,FN,Total\\_Cost\"_",
+  "tags": [
+    "Evaluation",
+    "Confusion Matrix",
+    "Threshold",
+    "Threshold Cost",
+    "Class Thresholds"
+  ],
+  "category": 11,
+  "kind": "script",
+  "source_code": "Generate_Threshold_Matrix.whizzml",
+  "inputs": [
+    {
+      "description": "Evaluation to inspect",
+      "name": "evaluation",
+      "type": "evaluation-id"
+    },
+    {
+      "default": "",
+      "description": "Input a valid value",
+      "name": "class-name",
+      "type": "string"
+    },
+    {
+      "default": 0,
+      "description": "Cost of a False Positive",
+      "name": "cost-FP",
+      "type": "number"
+    },
+    {
+      "default": 0,
+      "description": "Cost of a False Negative",
+      "name": "cost-FN",
+      "type": "number"
+    },
+    {
+      "default": "Per-treshold Costs",
+      "description": "Source and Dataset name",
+      "name": "dataset-name",
+      "type": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "description": "Output dataset containing Threshold,TP,FP,TN,FN,Total_Cost",
+      "name": "dataset",
+      "type": "dataset-id"
+    }
+  ]
+}

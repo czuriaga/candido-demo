@@ -1,0 +1,41 @@
+;; Function that receives a evaluation and a class_name, and returns
+;; result.model.per_class_statistics.per_threshold_confusion_matrices
+;; of that class
+(define (get-ptcm evl-id class-name)
+  (let (evaluation (fetch evl-id)
+        mypcs (evaluation ["result" "model" "per_class_statistics"]))
+    (loop (ls mypcs)
+          (when (not (empty? ls))
+            (if (= ((head ls) "class_name") class-name)
+                ((head ls) "per_threshold_confusion_matrices")
+                (recur (tail ls)))))))
+
+;; A function that receives a "per_threshold_confusion_matrices"
+;; list and retuns a new list
+(define (mnt-dataset my-ptcm cost-FP cost-FN)
+  (for (x my-ptcm)
+    (let (threshold (x [1] "")
+          tp (x [0 0])
+          fp (x [0 1])
+          tn (x [0 2])
+          fn (x [0 3]))
+       [threshold tp fp tn fn (+ (* fp cost-FP) (* fn cost-FN))])))
+
+;; A function that receives a list of rows and a name,
+;; and creates a source inline
+(define (create-source-from-rows rows name)
+  (let (header "Threshold,TP,FP,TN,FN,Total_Cost"
+        data (join "\n"
+                   (map (lambda (r) (join "," (map str r))) rows)))
+    (create-and-wait-source 
+       {"name" name "data" (join "\n" [header data])})))
+
+;; Main call to create a dataset, using as parameters
+;; an evaluation, a class_name and the dataset_name
+(define dataset
+  (create-and-wait-dataset 
+    (create-source-from-rows
+      (mnt-dataset (get-ptcm evaluation class-name)
+                   cost-FP
+                   cost-FN)
+      dataset-name)))
