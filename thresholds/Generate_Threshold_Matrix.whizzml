@@ -32,13 +32,13 @@
 
 ;; Main call to create a dataset, using as parameters
 ;; an evaluation, a class_name and the dataset_name
-(define dataset
-  (create-and-wait-dataset 
-    (create-source-from-rows
-      (mnt-dataset (get-ptcm evaluation class-name)
-                   cost-FP
-                   cost-FN)
-      dataset-name)))
+;; (define dataset
+;;   (create-and-wait-dataset 
+;;     (create-source-from-rows
+;;       (mnt-dataset (get-ptcm evaluation class-name)
+;;                    cost-FP
+;;                    cost-FN)
+;;       dataset-name)))
 
 (if (and (string? class-name) (not (empty? class-name)))
     (let (dataset 
