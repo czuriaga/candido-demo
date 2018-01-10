@@ -4,11 +4,11 @@
 (define (get-ptcm evl-id class-name)
   (let (evaluation (fetch evl-id)
         mypcs (evaluation ["result" "model" "per_class_statistics"]))
-    (loop (ls mypcs)
-          (when (not (empty? ls))
-            (if (= ((head ls) "class_name") class-name)
-                ((head ls) "per_threshold_confusion_matrices")
-                (recur (tail ls)))))))
+     (loop (ls mypcs)
+           (when (not (empty? ls))
+             (if (= ((head ls) "class_name") class-name)
+                 ((head ls) "per_threshold_confusion_matrices")
+                 (recur (tail ls)))))))
 
 ;; A function that receives a "per_threshold_confusion_matrices"
 ;; list and retuns a new list
@@ -39,3 +39,14 @@
                    cost-FP
                    cost-FN)
       dataset-name)))
+
+(if (not (empty? class-name))
+    (let (dataset 
+      (create-and-wait-dataset 
+        (create-source-from-rows
+          (mnt-dataset (get-ptcm evaluation class-name)
+                       cost-FP
+                       cost-FN)
+          dataset-name))) dataset)
+    (raise "Empty class name"))
+

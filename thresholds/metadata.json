@@ -36,7 +36,7 @@
       "type": "number"
     },
     {
-      "default": "Per-treshold Costs",
+      "default": "Per-threshold Costs",
       "description": "Source and Dataset name",
       "name": "dataset-name",
       "type": "string"
