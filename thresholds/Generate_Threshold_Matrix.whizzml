@@ -48,5 +48,5 @@
                        cost-FP
                        cost-FN)
           dataset-name))) dataset)
-    (raise "Empty class name"))
+    "Empty class name")
 
