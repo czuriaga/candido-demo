@@ -40,7 +40,7 @@
                    cost-FN)
       dataset-name)))
 
-(if (and (string class-name) (not (empty? class-name)))
+(if (and (string? class-name) (not (empty? class-name)))
     (let (dataset 
       (create-and-wait-dataset 
         (create-source-from-rows
